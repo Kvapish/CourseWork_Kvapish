@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Багажное отделение аэропорта</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script defer src="js/bootstrap.bundle.min.js"></script>
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<div class="page">
+
+    <div class="container mt-4">
+
+        <div class="row">
+
+            <div class="content col-8">
+
+                <div class="content-header">
+
+                    <div class="h1 text-center">Багажное отделение аэропорта:</div>
+
+                </div>
+
+                <div class="searching row form-group mt-3 text-center">
+
+                    <div class="col-sm-12">
+                        <input class="form-control search-last-name" type="text" name=""
+                               id="search-luggage-receipt-number"
+                               placeholder="Поиск по номеру багажной квитанции">
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="content-table table table-bordered mt-3">
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="side-menu col-4">
+
+                <div class="control-buttons mb-3">
+                    <button type="button" class="button-add btn btn-secondary me-1" data-bs-toggle="modal"
+                            data-bs-target="#add-modal">
+                        Добавить пассажира
+                    </button>
+                </div>
+
+                <div class="filters mb-3">
+
+                    <div class="form-check filter">
+                        <input class="form-check-input show-luggage-weight-higher-than" type="radio" name="filterRadio"
+                               value=""
+                               id="show-luggage-weight-higher-than">
+                        <label class="form-check-label" for="show-luggage-weight-higher-than">
+                            Показать пассажиров с весом багажа больше чем 30 кг
+                        </label>
+                    </div>
+
+                    <div class="form-check filter mb-3">
+                        <input class="form-check-input show-all" type="radio" name="filterRadio" value=""
+                               id="show-all">
+                        <label class="form-check-label" for="show-all">
+                            Показать всех пассажиров
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="delete-by-number mb-3">
+                    <label class="form-check-label mb-2" id="edit-element-label" for="edit-element">
+                        Редактирование по номеру багажной квитанции:
+                    </label>
+                    <div class="input-group">
+                        <input class="form-control delete-element" type="text" name="" id="edit-element"
+                               placeholder="Номер багажной квитанции">
+                        <button type="submit" class="btn btn-secondary" id="edit-element-button" type="button">
+                            Редактировать
+                        </button>
+                    </div>
+                </div>
+
+                <div class="delete-by-last-name mb-3">
+                    <label class="form-check-label mb-2" id="delete-element-label" for="delete-element">
+                        Удаление всех пассажиров по фамилии:
+                    </label>
+                    <div class="input-group">
+                        <input class="form-control delete-element" type="text" name="" id="delete-element"
+                               placeholder="Фамилия">
+                        <button type="submit" class="btn btn-secondary" id="delete-element-button" type="button">
+                            Удалить
+                        </button>
+                    </div>
+                </div>
+
+                <div class="delete-by-number mb-3">
+                    <label class="form-check-label mb-2" id="sum-of-weights-label" for="sum-of-weights">
+                        Суммарный вес багажей на один рейс:
+                    </label>
+                    <div class="input-group">
+                        <input class="form-control delete-element" type="text" name="" id="sum-of-weights"
+                               placeholder="Номер рейса">
+                        <button type="submit" class="btn btn-secondary" id="sum-of-weights-button" type="button">
+                            Показать
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal modal-add" id="add-modal" aria-labelledby="add-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content-modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="add-modal-label">Добавить пассажира:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Имя:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-first-name">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Отчество:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-middle-name">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Фамилия:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-last-name">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Номер рейса:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-flight-number">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 15000)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Номер багажной квитанции:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-receipt-number">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 15000)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Количество мест багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-places-quantity">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и <= 15)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Cуммарный вес багажа пассажира:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-sum-weight">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 300 килограммов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Время размещения багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-placement-time">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 1440 минут)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Срок размещения багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-placement-term">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 7200 минут)
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="modal-add-send">
+                                Добавить
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-edit" id="edit-modal" aria-labelledby="edit-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content-modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="edit-modal-label">Редактировать пассажира:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Имя:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-first-name-edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Отчество:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-middle-name-edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Фамилия:
+                            </div>
+                            <input type="text" class="form-control" id="modal-input-last-name-edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная, длина < 30 символов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Номер рейса:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-flight-number-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 15000)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Номер багажной квитанции:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-receipt-number-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 15000)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Количество мест багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-places-quantity-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и <= 15)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Cуммарный вес багажа пассажира:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-sum-weight-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 300 килограммов)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Время размещения багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-placement-time-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 1440 минут)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Срок размещения багажа:
+                            </div>
+                            <input type="number" class="form-control" id="modal-input-luggage-placement-term-edit">
+                            <div class="form-text text-muted">
+                                (Число >= 0 и < 7200 минут)
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="modal-edit-send">
+                                Изменить
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>
